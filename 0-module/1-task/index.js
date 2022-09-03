@@ -1,3 +1,8 @@
 function sum(m, n) {
-  // ваш код...
+  const c = m + n
+  return c
 }
+
+sum(1,1)
+sum(2,5)
+
