@@ -1,9 +1,6 @@
-function showSalary(users, age) {
-  let string = ""; 
-  users.forEach((item)=>{ 
-    if (item.age <= age) { 
-      string = string + item.name + ", " + item.balance + "\n"; 
-    }
-  });
-  return string.slice(0, -1); 
+let showSalary = (users, age) => {
+  return users
+  .filter((item) => item['age'] <= age)
+  .map((item) => item['name'] + ', ' + item['balance'])
+  .join('\n');
 }
