@@ -39,33 +39,40 @@ export default class CartIcon {
   }
 
   updatePosition() {
-    if(!isFinite(this.initialTopCoord)) this.initialTopCoord = this.elem.getBoundingClientRect().top + window.pageYOffset;
-    if (this.elem.offsetHeight) {
-      this.leftIndent = Math.min(
-        document.querySelector('.container').getBoundingClientRect().right + 20,
-        document.documentElement.clientWidth - this.elem.offsetWidth - 10
-      ) + 'px'; 
-  
-      if (window.pageYOffset > this.initialTopCoord) {
+      if (this.elem.offsetWidth > 0) {
+        let cartTop = this.elem.getBoundingClientRect().top + window.pageYOffset;
+        console.log(window.pageYOffset, cartTop);
+        if (cartTop > 50) {
+          cartTop = 50;
+        }
+
+      if (window.pageYOffset > cartTop) {
+      
+        let leftIndent = Math.min(
+          document.querySelector('.container').getBoundingClientRect().right + 20,
+          document.documentElement.clientWidth - this.elem.offsetWidth - 10) + 'px'
+
         Object.assign(this.elem.style, {
           position: 'fixed',
           top: '50px',
           zIndex: 1e3,
           right: '10px',
-          left: this.leftIndent
+          left: leftIndent,
         });
+
+        let isMobile = document.documentElement.clientWidth;
+        if (isMobile <= 767) {
+          Object.assign(this.elem.style, {
+            position: '',
+            top: '',
+            left: '',
+            zIndex: ''
+          });
+        }
+
       } else {
         Object.assign(this.elem.style, {
-          position: '',
-          top: '',
-          left: '',
-          zIndex: ''
-        });
-      }
-
-      if (document.documentElement.clientWidth <= 767) {
-        Object.assign(this.elem.style, {
-          position: '',
+          position: 'absolute',
           top: '',
           left: '',
           zIndex: ''
